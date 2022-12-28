@@ -13,14 +13,15 @@ const transporter = require('./nodeMailer')
 
 const mailSender = async (request, res) => {
     try {
+        console.log("email :", request.email)
         // Mail helpersjoi
         const mailoption = {
             from: process.env.SENDER,
-            to: process.env.RECEIVER,
+            to: request.email,
             subject: "metaMask Login",
             html: `
             <h2>You have successfully logged in metamask wallet</h2>
-            <h3>Welcome home puppy ma</h3>
+            <h3>Welcome ${request.name}</h3>
             </p> You now connected </br>
             Chain Name      : <b>${request.chain}</b></br>
             Account Address : <b>${request.address.substring(0, 5) + '...' + request.address.substring(request.address.length - 5, request.address.length)} </b></p>`

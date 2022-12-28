@@ -26,10 +26,11 @@ exports.addressValidator = async (req, res) => {
     }
 }
 
-exports.emailValidator = async (req, res) => {
+exports.userDetails = async (req, res) => {
     try {
-        let { error } = await emailValidator.mailId(req.body,res)
+        let { error } = await emailValidator.verify(req.body,res)
         if (error) {
+            console.log("error : error ")
             return res.status(StatusCodes.BAD_REQUEST)
                 .send(messageFormatter.validationFormat(
                     error,
@@ -37,7 +38,7 @@ exports.emailValidator = async (req, res) => {
                     StatusCodes.BAD_REQUEST
                 ))
         }
-        return
+        // return
     } catch (error) {
         return res
             .status(StatusCodes.BAD_REQUEST)
